@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<html lang="en" class="no-js"
+		xmlns:th="http://www.thymeleaf.org">
 
 	<head>
         <meta charset="UTF-8" />
@@ -51,23 +48,40 @@
                         </div>
 
                         <div id="register" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
+                            <form  th:object="${user}" th:action="@{/users/register}" method="post" autocomplete="on"> 
                                 <h1> Sign up </h1> 
                                 <p> 
-                                    <label for="usernamesignup" class="uname" >Your username</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                                    <label for="usernamesignup" class="uname" >User Name</label>
+                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="User Name" 
+                                    	th:field="*{username}" />
+                                    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:class="help-block">Username Errors</span>
                                 </p>
                                 <p> 
-                                    <label for="emailsignup" class="youmail"  > Your email</label>
-                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                                    <label for="fnamesignup" class="fname" >First Name</label>
+                                    <input id="fnamesignup" name="fnamesignup" required="required" type="text" placeholder="First Name" 
+                                    	th:field="*{firstName}" />
+                                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:class="help-block">First Name Errors</span>
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup" class="youpasswd" >Your password </label>
-                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <label for="usernamesignup" class="uname" >Surname</label>
+                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" 
+                                    	th:field="*{lastName}" />
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup_confirm" class="youpasswd" >Please confirm your password </label>
-                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <label for="emailsignup" class="youmail"  >Email Address</label>
+                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"
+                                    	th:field="*{email}" /> 
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup" class="youpasswd" >New Password </label>
+                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"
+                                    	th:field="*{password}" />
+                                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:class="help-block">Password Errors</span>
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup_confirm" class="youpasswd" >Confirm Password </label>
+                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"
+                                    	th:field="*{confirmPassword}" />
                                 </p>
                                 <p class="signin button"> 
 									<input type="submit" value="Sign up"/> 

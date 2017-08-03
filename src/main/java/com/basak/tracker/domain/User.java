@@ -17,7 +17,7 @@ public class User {
 	@GeneratedValue
 	private Long id;
 
-	@NotEmpty
+	@NotEmpty(message="User Name is Required.")
 	@Size(min=2, max=30)
 	private String username;
 	
@@ -33,8 +33,9 @@ public class User {
 	@Size(min=2, max=30)
 	private String lastName;
 	
-	@NotEmpty
-	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")
+	@NotEmpty(message="Password is Required.")
+	@Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})",
+			 message="{user.password.policy}")
 	private String password;
 	
 	@NotEmpty

@@ -446,8 +446,7 @@ p.change_link{
 		 border-radius: 5px;
 }
 #register{	
-	z-index: 21;
-	opacity: 0;
+	z-index: 22;
 }
 #login{
 	z-index: 22;

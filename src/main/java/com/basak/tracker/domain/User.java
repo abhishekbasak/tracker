@@ -17,28 +17,28 @@ public class User {
 	@GeneratedValue
 	private Long id;
 
-	@NotEmpty(message="User Name is Required.")
-	@Size(min=2, max=30)
+	@NotEmpty(message="User Name is required")
+	@Size(min=2, max=30, message="Length of User Name should be between 2 to 30")
 	private String username;
 	
-	@NotEmpty
+	@NotEmpty(message="email is required")
 	@Email
 	private String email;
 	
-	@NotEmpty
-	@Size(min=2, max=30)
+	@NotEmpty(message="First Name is required")
+	@Size(min=2, max=30, message="Length of First Name should be between 2 to 30")
 	private String firstName;
 	
-	@NotEmpty
+	@NotEmpty(message="Last Name is required")
 	@Size(min=2, max=30)
 	private String lastName;
 	
-	@NotEmpty(message="Password is Required.")
+	@NotEmpty(message="Password is required")
 	@Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})",
 			 message="{user.password.policy}")
 	private String password;
 	
-	@NotEmpty
+	@NotEmpty(message="Confirm Password is required")
 	@Transient
 	private String confirmPassword;
 

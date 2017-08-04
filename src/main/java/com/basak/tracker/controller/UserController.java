@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.basak.tracker.domain.User;
 import com.basak.tracker.service.UserService;
+import com.basak.tracker.validator.UserValidator;
 
 @Controller
 @RequestMapping("/users")
@@ -19,12 +20,23 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserValidator userValidator;
+	
+	@RequestMapping(value = "/register")
+	public String register(Model model) {
+		model.addAttribute("user", new User());
+		return "users/register";
+	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(@Valid User user, BindingResult bindingResult, Model model) {
+		userValidator.validate(user, bindingResult);
+		
 		if (bindingResult.hasErrors()) {
-			return "index";
+			return "users/register";
 		} else {
-			User newUser = userService.save(user);
+			userService.save(user);
 			return "redirect:/";
 		}
 	}
